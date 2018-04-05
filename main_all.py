@@ -409,11 +409,6 @@ pl.subplot(122)
 pl.plot(np.abs(X)**2)
 
  
-
- 
-
- 
-
  
 
 pl.subplot(311)
