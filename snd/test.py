@@ -22,41 +22,45 @@ sdn.sig2wframe()
 
 
 #%%
-sdn.frame_analysis()
+sdn.frame_analysis(opt_N_hrmnc = .05)
 
-#%%
+
 sdn.frame2sig()
-
-#%%
-pl.plot(sdn.sig_modified)
-pl.plot(sdn.rec_signal)
-
-
-
-#%%
-f = np.arange(2048)/4096
-pl.clf()
-pl.subplot(221) 
-pl.plot(f,np.abs(sdn.frames_fft[:,0]))
-pl.plot(sdn.frq_est[0], sdn.amp_est[0]/2,'o')
-
-
-pl.subplot(222) 
-pl.plot(sdn.frames[:,0])
-
-pl.subplot(223) 
-pl.plot(sdn.sig_mat[:,0])
-
 #%%
 pl.close()
-ax = pl.subplot(411)
-pl.plot(time,sig)
-
-ax = pl.subplot(412)
-sdn.plot_signal(ax=ax, color='r')
-
-ax = pl.subplot(413)
-pl.plot(np.arange(len(sdn.sig_modified))/Fs,sdn.rec_signal)
-
-ax = pl.subplot(414)
-pl.plot(np.arange(len(sdn.sig_modified))/Fs,sdn.sig_modified - sdn.rec_signal)
+sdn.draw_spectrogram()
+#
+#
+#pl.clf()
+#pl.plot(sdn.sig_modified)
+#pl.plot(sdn.rec_signal)
+#
+#
+#
+##%%
+#fr = np.arange(2048)/4096
+#pl.clf()
+#pl.subplot(221) 
+#pl.plot(fr,np.abs(sdn.frames_fft[:,0]))
+#pl.plot(sdn.frq_est[0], sdn.amp_est[0]/2,'o')
+#
+#
+#pl.subplot(222) 
+#pl.plot(sdn.frames[:,0])
+#
+#pl.subplot(223) 
+#pl.plot(sdn.sig_mat[:,0])
+#
+##%%
+#pl.close()
+#ax = pl.subplot(411)
+#pl.plot(time,sig)
+#
+#ax = pl.subplot(412)
+#sdn.plot_signal(ax=ax, color='r')
+#
+#ax = pl.subplot(413)
+#pl.plot(np.arange(len(sdn.sig_modified))/Fs,sdn.rec_signal)
+#
+#ax = pl.subplot(414)
+#pl.plot(np.arange(len(sdn.sig_modified))/Fs,sdn.sig_modified - sdn.rec_signal)

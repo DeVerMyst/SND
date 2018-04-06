@@ -48,7 +48,7 @@ def peakdet(v, delta):
 
  
 
-def estimate_frame_prameters(spec_frame, Nfft, percents=0):
+def estimate_frame_prameters(spec_frame, Nfft):
 
     delta = 100
 
@@ -73,10 +73,13 @@ def estimate_frame_prameters(spec_frame, Nfft, percents=0):
 def red_data(f,a,p,N):
 
     ind = np.argsort(a)
+    if N < len(f):
+        ind = ind[-N:]
+        return f[ind], a[ind], p[ind]        
+    else: 
+        print('The number of found peak is less than %d' %N)
+        return f, a, p
 
-    ind = ind[-N:]
-
-    return f[ind], a[ind], p[ind]
 
  
 
@@ -113,7 +116,7 @@ def create_frame(f, a, p, L_frame):
 
  
 
-def create_frames(size_out, X, Nfft):
+def create_frames(size_out, X, Nfft, prm):
     
     L_frame, N_frame = size_out
 
@@ -125,8 +128,14 @@ def create_frames(size_out, X, Nfft):
 
         f, a, p = estimate_frame_prameters(X[:,n], Nfft)
 
-        N_f = est_ord(a)
+        if prm<1 :
+            N_f = est_ord(a, prm)
+        elif type(prm)==int and prm>1:
+            N_f = prm
+        else:
+            raise ValueError('Parameter must be <1 or a positive integer')
 
+        
         f, a, p = red_data(f, a, p, N_f)
         
         f_list.append(f)
